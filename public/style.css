@@ -1,0 +1,443 @@
+
+/* Basic page settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main page */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #F8F6FC;
+}
+
+/* Main chatbot layout */
+.chatbot-container {
+    display: flex;
+    height: 100vh;
+    padding: 15px;
+    gap: 15px;
+}
+
+/* Sidebar design */
+.sidebar {
+    width: 260px;
+    background-color: #EDE7F6;
+    border-radius: 20px;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* AI name */
+.sidebar h2 {
+    color: #66558F;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+/* New chat button */
+.new-chat-btn {
+    background-color: #B8A5DC;
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button hover effect */
+.new-chat-btn:hover {
+    background-color: #9D89C8;
+    transform: translateY(-2px);
+}
+
+/* Recent chats */
+.chat-history {
+    margin-top: 35px;
+}
+
+.chat-history h3 {
+    color: #66558F;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.chat-history p {
+    color: #9288A5;
+    font-size: 13px;
+}
+
+/* Bottom sidebar options */
+.sidebar-bottom {
+    margin-top: auto;
+    border-top: 1px solid #D8CDE9;
+    padding-top: 18px;
+}
+
+.sidebar-bottom p {
+    color: #66558F;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.sidebar-bottom p:hover {
+    background-color: #DDD3EF;
+}
+
+/* Main Chat Section */
+.main-chat {
+    flex: 1;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(120, 100, 150, 0.08);
+}
+
+/* Chat Header */
+.chat-header {
+    height: 75px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #F0EBF5;
+}
+
+/* Chatbot Name */
+.chat-header h2 {
+    color: #66558F;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+/* Online Status */
+.chat-header span {
+    color: #65A88A;
+    background-color: #E9F6EF;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Chat Display Area */
+.chat-area {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background-color: #FEFCFF;
+}
+
+/* Welcome Screen */
+.welcome-section {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+/* Welcome Heading */
+.welcome-section h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #76649F;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+/* Welcome Description */
+.welcome-section p {
+    font-size: 16px;
+    color: #91889F;
+    line-height: 1.7;
+    max-width: 450px;
+}
+
+/* Empty Messages Area */
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+/* Message Input Area */
+.input-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 30px;
+    background-color: #FFFFFF;
+    border-top: 1px solid #F0EBF5;
+}
+
+/* Text Input */
+.input-area input {
+    flex: 1;
+    height: 52px;
+    padding: 0 20px;
+    border: 1px solid #E4DCEF;
+    border-radius: 15px;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+    color: #66558F;
+    background-color: #FCFAFF;
+    transition: 0.3s;
+}
+
+/* Placeholder */
+.input-area input::placeholder {
+    color: #AAA0B8;
+}
+
+/* Input Focus Effect */
+.input-area input:focus {
+    border-color: #B8A5DC;
+    box-shadow: 0 0 0 3px rgba(184, 165, 220, 0.15);
+}
+
+/* Send Button */
+.input-area button {
+    height: 52px;
+    padding: 0 25px;
+    background-color: #A994D1;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Send Button Hover */
+.input-area button:hover {
+    background-color: #8E79BC;
+    transform: translateY(-2px);
+}
+
+/* Common Message Styling */
+.message {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    animation: messageAppear 0.3s ease;
+}
+
+/* User Message */
+.user-message {
+    align-self: flex-end;
+    background-color: #E9E1F7;
+    color: #594A78;
+    border-bottom-right-radius: 5px;
+}
+
+/* AI Message */
+.ai-message {
+    align-self: flex-start;
+    background-color: #F5F1FA;
+    color: #625A70;
+    border-bottom-left-radius: 5px;
+}
+
+/* Message Animation */
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =================================
+   PROFESSIONAL DESIGN IMPROVEMENTS
+================================= */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better overall text appearance */
+body {
+    color: #625A70;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Improve sidebar appearance */
+.sidebar {
+    box-shadow: 0 4px 20px rgba(120, 100, 150, 0.08);
+    border: 1px solid #E5DDF0;
+}
+
+/* Improve main chat appearance */
+.main-chat {
+    border: 1px solid #F0EBF5;
+}
+
+/* Smooth button interactions */
+button {
+    transition: all 0.25s ease;
+}
+
+/* Button click effect */
+button:active {
+    transform: scale(0.97);
+}
+
+/* Better input appearance */
+input {
+    transition: all 0.25s ease;
+}
+
+/* Custom scrollbar */
+.chat-area::-webkit-scrollbar {
+    width: 7px;
+}
+
+.chat-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-area::-webkit-scrollbar-thumb {
+    background-color: #D9CEE9;
+    border-radius: 10px;
+}
+
+.chat-area::-webkit-scrollbar-thumb:hover {
+    background-color: #B8A5DC;
+}
+
+/* Text selection colour */
+::selection {
+    background-color: #DDD2F0;
+    color: #594A78;
+}
+
+/* Keyboard focus visibility */
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #B8A5DC;
+    outline-offset: 3px;
+}
+
+/* =================================
+   RESPONSIVE CHATBOT DESIGN
+================================= */
+
+/* Tablets and smaller laptops */
+@media screen and (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .chat-header {
+        padding: 0 20px;
+    }
+
+    .chat-area {
+        padding: 20px;
+    }
+
+    .welcome-section h1 {
+        font-size: 34px;
+    }
+
+}
+
+/* Mobile phones */
+@media screen and (max-width: 600px) {
+
+    .chatbot-container {
+        padding: 0;
+        gap: 0;
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    /* Hide sidebar on mobile */
+    .sidebar {
+        display: none;
+    }
+
+    /* Main chat takes full screen */
+    .main-chat {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    /* Smaller header */
+    .chat-header {
+        height: 65px;
+        padding: 0 16px;
+    }
+
+    .chat-header h2 {
+        font-size: 17px;
+    }
+
+    /* Chat area spacing */
+    .chat-area {
+        padding: 15px;
+    }
+
+    /* Welcome heading */
+    .welcome-section {
+        min-height: 280px;
+        padding: 20px 10px;
+    }
+
+    .welcome-section h1 {
+        font-size: 30px;
+    }
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+    /* Message bubbles */
+    .message {
+        max-width: 90%;
+        font-size: 14px;
+    }
+
+    /* Input area */
+    .input-area {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .input-area input {
+        min-width: 0;
+        height: 48px;
+        padding: 0 12px;
+        font-size: 14px;
+    }
+
+    .input-area button {
+        height: 48px;
+        padding: 0 17px;
+        font-size: 14px;
+    }
+
+}

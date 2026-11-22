@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My AI Chatbot</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="chatbot-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <h2>My AI</h2>
+
+            <button class="new-chat-btn" id="new-chat-btn">
+                + New Chat
+            </button>
+
+            <div class="chat-history">
+                <h3>Recent Chats</h3>
+                <p>No conversations yet</p>
+            </div>
+
+            <div class="sidebar-bottom">
+                <p>Settings</p>
+                <p>About</p>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Chat Section -->
+        <main class="main-chat">
+
+            <!-- Header -->
+            <header class="chat-header">
+                <h2>My AI Assistant</h2>
+                <span>● Online</span>
+            </header>
+
+
+            <!-- Chat Area -->
+            <section class="chat-area">
+
+                <div class="welcome-section" id="welcome-section">
+
+                    <h1>Hello! 👋</h1>
+
+                    <p>
+                        Welcome to My AI Chatbot.
+                        How can I help you today?
+                    </p>
+
+                </div>
+
+                <div class="messages-container" id="messages">
+
+                </div>
+
+            </section>
+
+
+            <!-- Input Area -->
+            <footer class="input-area">
+
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                >
+
+                <button id="send-btn">
+                    Send
+                </button>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+    <!-- Markdown formatting library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- HTML security library -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+
+    <!-- Our chatbot JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
