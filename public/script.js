@@ -13,6 +13,12 @@ const messagesContainer = document.getElementById("messages");
 const newChatButton = document.getElementById("new-chat-btn");
 const welcomeSection = document.getElementById("welcome-section");
 const themeToggle = document.getElementById("theme-toggle");
+const settingsModal = document.getElementById("settings-modal");
+const aboutModal = document.getElementById("about-modal");
+const settingsButton = document.getElementById("settings-btn");
+const aboutButton = document.getElementById("about-btn");
+const appearanceValue = document.getElementById("appearance-value");
+const motionSwitch = document.getElementById("motion-switch");
 
 
 // STEP 1.1: Apply and smoothly switch the selected theme
@@ -29,6 +35,7 @@ function updateThemeControl(theme) {
         "aria-label",
         isDark ? "Switch to light mode" : "Switch to dark mode"
     );
+    appearanceValue.textContent = isDark ? "Dark mode" : "Light mode";
 }
 
 updateThemeControl(getTheme());
@@ -56,6 +63,85 @@ themeToggle.addEventListener("click", (event) => {
     } else {
         applyTheme();
     }
+});
+
+function openModal(modal) {
+    modal.hidden = false;
+    modal.querySelector("button")?.focus();
+}
+
+function closeModal(modal) {
+    modal.hidden = true;
+}
+
+settingsButton.addEventListener("click", () => openModal(settingsModal));
+aboutButton.addEventListener("click", () => openModal(aboutModal));
+
+document.getElementById("settings-close").addEventListener("click", () => closeModal(settingsModal));
+document.getElementById("about-close").addEventListener("click", () => closeModal(aboutModal));
+
+settingsModal.addEventListener("click", (event) => {
+    if (event.target === settingsModal) closeModal(settingsModal);
+});
+
+aboutModal.addEventListener("click", (event) => {
+    if (event.target === aboutModal) closeModal(aboutModal);
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeModal(settingsModal);
+        closeModal(aboutModal);
+    }
+});
+
+document.getElementById("settings-theme-btn").addEventListener("click", () => {
+    themeToggle.click();
+});
+
+const savedFontSize = localStorage.getItem("chatbot-font-size") || "medium";
+
+function applyFontSize(size) {
+    const fontSizes = {
+        small: "13px",
+        medium: "15px",
+        large: "17px"
+    };
+
+    document.documentElement.style.setProperty("--chat-font-size", fontSizes[size]);
+    document.querySelectorAll("[data-font-size]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.fontSize === size);
+    });
+    localStorage.setItem("chatbot-font-size", size);
+}
+
+applyFontSize(savedFontSize);
+
+document.querySelectorAll("[data-font-size]").forEach((button) => {
+    button.addEventListener("click", () => applyFontSize(button.dataset.fontSize));
+});
+
+const motionEnabled = localStorage.getItem("chatbot-motion") !== "off";
+
+function applyMotion(enabled) {
+    document.documentElement.dataset.motion = enabled ? "on" : "off";
+    motionSwitch.setAttribute("aria-checked", String(enabled));
+    localStorage.setItem("chatbot-motion", enabled ? "on" : "off");
+}
+
+applyMotion(motionEnabled);
+
+motionSwitch.addEventListener("click", () => {
+    applyMotion(motionSwitch.getAttribute("aria-checked") !== "true");
+});
+
+document.getElementById("clear-chat-btn").addEventListener("click", () => {
+    messagesContainer.innerHTML = "";
+    conversationHistory.length = 0;
+    welcomeSection.style.display = "flex";
+    userInput.value = "";
+    closeModal(settingsModal);
+    userInput.focus();
 });
 
 
@@ -278,7 +364,7 @@ newChatButton.addEventListener("click", function () {
     conversationHistory.length = 0;
 
     // Show welcome screen
-    welcomeSection.style.display = "block";
+    welcomeSection.style.display = "flex";
 
     // Clear input
     userInput.value = "";
