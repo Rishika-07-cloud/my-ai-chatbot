@@ -374,69 +374,128 @@ body {
 }
 
 .theme-toggle {
-    display: inline-flex;
+    display: inline-grid;
+    place-items: center;
     align-items: center;
-    gap: 7px;
     height: 38px;
-    padding: 0 8px;
-    border: 1px solid var(--input-border);
+    width: 68px;
+    padding: 3px;
+    border: 1px solid rgba(184, 165, 220, 0.48);
     border-radius: 999px;
-    background: var(--input-bg);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #FFF8D8 0%, #F3E7FF 100%);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.9),
+        0 6px 18px rgba(115, 94, 150, 0.14);
+    overflow: hidden;
     cursor: pointer;
 }
 
 .theme-toggle:hover {
-    border-color: var(--accent);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.9),
+        0 8px 22px rgba(115, 94, 150, 0.22);
 }
 
-.theme-icon {
-    display: grid;
-    width: 18px;
-    height: 18px;
-    place-items: center;
-    font-size: 13px;
-    line-height: 1;
-    transition: opacity 220ms ease, transform 520ms cubic-bezier(.22, 1, .36, 1);
-}
-
-.theme-toggle-track {
+.theme-orbit {
     position: relative;
-    width: 34px;
-    height: 18px;
+    display: block;
+    width: 60px;
+    height: 30px;
     border-radius: 999px;
-    background: #D3C6E7;
-    transition: background-color 420ms ease;
+    background:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.95) 0 1px, transparent 2px),
+        radial-gradient(circle at 82% 72%, rgba(255,255,255,0.75) 0 1px, transparent 2px),
+        linear-gradient(135deg, #FCE9A8 0%, #E7C7F1 100%);
+    box-shadow:
+        inset 0 2px 5px rgba(255, 255, 255, 0.75),
+        inset 0 -3px 8px rgba(163, 120, 173, 0.12);
+    transition: background 650ms cubic-bezier(.22, 1, .36, 1),
+                box-shadow 650ms cubic-bezier(.22, 1, .36, 1);
 }
 
-.theme-toggle-thumb {
+.theme-celestial {
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 12px;
-    height: 12px;
+    z-index: 2;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: #FFFFFF;
-    box-shadow: 0 1px 5px rgba(50, 38, 70, 0.25);
-    transition: transform 520ms cubic-bezier(.22, 1, .36, 1);
+    background:
+        radial-gradient(circle at 35% 34%, #FFFCEB 0 18%, transparent 19%),
+        radial-gradient(circle at 38% 38%, #FFD76A 0 42%, #F7AD55 43% 70%, #E99545 71%);
+    box-shadow:
+        0 0 0 3px rgba(255, 224, 145, 0.24),
+        0 3px 9px rgba(221, 155, 74, 0.34);
+    transition:
+        left 620ms cubic-bezier(.34, 1.56, .64, 1),
+        background 620ms ease,
+        box-shadow 620ms ease,
+        transform 620ms cubic-bezier(.34, 1.56, .64, 1);
 }
 
-:root[data-theme="dark"] .theme-toggle-track {
-    background: #746090;
+.theme-stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 300ms ease 120ms;
 }
 
-:root[data-theme="dark"] .theme-toggle-thumb {
-    transform: translateX(16px);
+.theme-stars i {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #F7F2FF;
+    box-shadow: 0 0 5px #FFFFFF;
 }
 
-:root[data-theme="dark"] .theme-icon-sun {
-    opacity: 0.45;
-    transform: rotate(-25deg) scale(0.85);
+.theme-stars i:nth-child(1) {
+    top: 7px;
+    right: 11px;
 }
 
-:root[data-theme="light"] .theme-icon-moon {
-    opacity: 0.45;
-    transform: rotate(25deg) scale(0.85);
+.theme-stars i:nth-child(2) {
+    top: 17px;
+    right: 20px;
+    width: 3px;
+    height: 3px;
+}
+
+.theme-stars i:nth-child(3) {
+    top: 8px;
+    right: 31px;
+}
+
+:root[data-theme="dark"] .theme-toggle {
+    background: linear-gradient(135deg, #302348 0%, #171C35 100%);
+    border-color: rgba(174, 151, 224, 0.42);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.08),
+        0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .theme-orbit {
+    background: linear-gradient(135deg, #2D3158 0%, #17182D 100%);
+    box-shadow:
+        inset 0 2px 6px rgba(181, 168, 232, 0.12),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="dark"] .theme-celestial {
+    left: 34px;
+    transform: rotate(-12deg);
+    background:
+        radial-gradient(circle at 68% 30%, #AFA5C4 0 8%, transparent 9%),
+        radial-gradient(circle at 32% 65%, #AAA1BA 0 12%, transparent 13%),
+        radial-gradient(circle at 50% 48%, #F3F0D2 0 58%, #C8C3DD 59% 72%, #AAA4C6 73%);
+    box-shadow:
+        0 0 0 3px rgba(198, 190, 226, 0.12),
+        0 3px 10px rgba(185, 176, 219, 0.24);
+}
+
+:root[data-theme="dark"] .theme-stars {
+    opacity: 1;
 }
 
 /* Smooth, GPU-friendly liquid theme reveal */
