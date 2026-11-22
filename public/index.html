@@ -8,6 +8,14 @@
 
     <title>My AI Chatbot</title>
 
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("chatbot-theme");
+            const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.dataset.theme = theme;
+        }());
+    </script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -43,7 +51,23 @@
             <!-- Header -->
             <header class="chat-header">
                 <h2>My AI Assistant</h2>
-                <span>● Online</span>
+                <div class="header-actions">
+                    <span>● Online</span>
+                    <button
+                        class="theme-toggle"
+                        id="theme-toggle"
+                        type="button"
+                        role="switch"
+                        aria-label="Switch to dark mode"
+                        aria-checked="false"
+                    >
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+                        <span class="theme-toggle-track" aria-hidden="true">
+                            <span class="theme-toggle-thumb"></span>
+                        </span>
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+                    </button>
+                </div>
             </header>
 
 

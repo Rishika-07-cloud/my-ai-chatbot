@@ -12,6 +12,51 @@ const sendButton = document.getElementById("send-btn");
 const messagesContainer = document.getElementById("messages");
 const newChatButton = document.getElementById("new-chat-btn");
 const welcomeSection = document.getElementById("welcome-section");
+const themeToggle = document.getElementById("theme-toggle");
+
+
+// STEP 1.1: Apply and smoothly switch the selected theme
+
+function getTheme() {
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function updateThemeControl(theme) {
+    const isDark = theme === "dark";
+
+    themeToggle.setAttribute("aria-checked", String(isDark));
+    themeToggle.setAttribute(
+        "aria-label",
+        isDark ? "Switch to light mode" : "Switch to dark mode"
+    );
+}
+
+updateThemeControl(getTheme());
+
+themeToggle.addEventListener("click", (event) => {
+    const nextTheme = getTheme() === "dark" ? "light" : "dark";
+    const rect = themeToggle.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    document.documentElement.style.setProperty("--theme-x", `${x}px`);
+    document.documentElement.style.setProperty("--theme-y", `${y}px`);
+
+    const applyTheme = () => {
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem("chatbot-theme", nextTheme);
+        updateThemeControl(nextTheme);
+    };
+
+    if (
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        document.startViewTransition
+    ) {
+        document.startViewTransition(applyTheme);
+    } else {
+        applyTheme();
+    }
+});
 
 
 // STEP 2: Store conversation history
