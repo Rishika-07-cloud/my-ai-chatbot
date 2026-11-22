@@ -35,7 +35,18 @@ function displayMessage(message, sender) {
         messageElement.classList.add("ai-message");
     }
 
-    messageElement.textContent = message;
+    if (sender === "ai" && window.marked && window.DOMPurify) {
+        const renderedMarkdown = window.marked.parse(message, {
+            breaks: true,
+            gfm: true
+        });
+
+        messageElement.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
+            USE_PROFILES: { html: true }
+        });
+    } else {
+        messageElement.textContent = message;
+    }
 
     messagesContainer.appendChild(messageElement);
 

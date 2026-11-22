@@ -11,6 +11,7 @@ This project allows users to interact with an AI assistant through a clean and u
 - Interactive chatbot interface
 - Conversation context and follow-up questions
 - Typing indicator while the AI generates a response
+- Markdown formatting for AI replies, including lists, code blocks, tables, links, and blockquotes
 - New Chat functionality
 - Responsive design
 - Secure API key handling using environment variables
