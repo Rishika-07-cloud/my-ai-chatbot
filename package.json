@@ -1,0 +1,19 @@
+{
+  "name": "ai-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A responsive AI chatbot using Express and the Groq API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "groq-sdk": "^0.37.0"
+  }
+}

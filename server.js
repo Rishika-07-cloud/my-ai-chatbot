@@ -20,18 +20,25 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// STEP 5: Check whether the Groq API key exists
+// STEP 5: Provide a health check for deployment platforms
 
-if (!process.env.GROQ_API_KEY) {
-    console.error("ERROR: GROQ_API_KEY is missing from your .env file.");
-    process.exit(1);
-}
+app.get("/api/health", (req, res) => {
+    res.json({
+        status: "ok",
+        groqConfigured: Boolean(process.env.GROQ_API_KEY)
+    });
+});
 
 // STEP 6: Create the chat API endpoint
 
 app.post("/api/chat", async (req, res) => {
 
     try {
+        if (!process.env.GROQ_API_KEY) {
+            return res.status(500).json({
+                error: "The GROQ_API_KEY environment variable is not configured."
+            });
+        }
 
         // Import the Groq SDK
         const { default: Groq } = await import("groq-sdk");
@@ -106,13 +113,15 @@ app.post("/api/chat", async (req, res) => {
 
 });
 
-// STEP 7: Start the server
+// STEP 7: Start locally or export for Vercel serverless deployment
 
-app.listen(PORT, () => {
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log("--------------------------------");
+        console.log("My AI Chatbot server is running!");
+        console.log(`Open http://localhost:${PORT}`);
+        console.log("--------------------------------");
+    });
+}
 
-    console.log("--------------------------------");
-    console.log("My AI Chatbot server is running!");
-    console.log(`Open http://localhost:${PORT}`);
-    console.log("--------------------------------");
-
-});
+module.exports = app;

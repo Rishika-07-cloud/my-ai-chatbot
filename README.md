@@ -99,6 +99,15 @@ Visit:
 
 http://localhost:3000
 
+## ▲ Deploy to Vercel
+
+1. Push this project to GitHub.
+2. Import the GitHub repository at [vercel.com/new](https://vercel.com/new).
+3. Add `GROQ_API_KEY` as an Environment Variable in the Vercel project settings.
+4. Deploy. Vercel will use `vercel.json` and `server.js` automatically.
+
+The project includes a deployment health endpoint at `/api/health`.
+
 ## 🔐 Security
 
 - API keys are stored in environment variables.
